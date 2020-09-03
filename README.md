@@ -32,7 +32,6 @@ python manage.py loaddata data.xml
 
 python manage.py runserver
 
-
 9. Открыть URL и наслаждаться;)
 
 http://127.0.0.1:8000/
