@@ -1,0 +1,50 @@
+{% extends "wrapper.html" %}
+{% block content %}
+  <h1 class="display-4">Добро пожаловать в мою библиотеку</h1>
+  <div class="row d-flex align-items-end justify-content-between">
+    <div class="col-9">
+      <p class="lead text-info">SkillFactory<span class="text-danger">:</span>D6.11 Домашнее задание</p>
+      <ul>
+        <li>Добавить CSS-стили, которые раздать через STATIC для страниц библиотеки.</li>
+        <li>Создать базовый шаблон wrapper.html и задать в нём блоки, которые переопределяются в дочерних шаблонах.</li>
+        <li>Добавить в модель книги возможность загружать картинки к книгам.</li>
+        <li>Описать процесс разворачивания проекта с нуля в файле README.md в корне репозитория. По нему должно быть понятно, какой это проект, какой функционал есть, как его клонировать, как поднять сервер и как добавить/обновить в нём записи о книгах.</li>
+      </ul>
+    </div>
+    <div class="col-auto">
+      <a class="btn btn-outline-info" href='{% url "create_book" %}'>Добавить книгу</a>
+    </div>
+  </div>
+  <div class="table-responsive my-3">
+    <table class="table table-borderless text-secondary table-hover m-0">
+      <thead class="bg-info text-light">
+        <tr>
+          <th scope="col"></th>
+          <th scope="col" class="table_cell">Книга</th>
+          <th scope="col" class="text-center table_cell">Автор</th>
+          <th scope="col" class="text-center table_cell">Страна</th>
+          <th scope="col" class="text-center table_cell">Год издания</th>
+          <th scope="col" class="text-center table_cell">Остаток</th>
+          <th scope="col" class="text-center table_cell">У друзей</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        {% for book in books_list %}
+          <tr style="cursor: pointer; cursor: hand;" onclick="window.location='/book/{{ book.id }}'">
+              <th scope="row"><img class="border border-info" src="{{ book.image.url }}" width="60"/></th>
+              <td class="lead table_cell"><strong>{{ book.title }}</strong></td>
+              <td class="text-center table_cell">{{ book.author.full_name }}</td>
+              <td class="text-center table_cell">{{ book.author.country }}</td>
+              <td class="text-center table_cell">{{ book.year_release }}</td>
+              <td class="text-center table_cell">{{ book.copy_count }}</td>
+              <td class="text-center table_cell">{{ book.friends.all|length }}</td>
+          </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+  </div>
+
+  <span class="badge rounded-0 badge-info pb-1 col-12 my-3">Общее количество наименований в библиотеке {{ books_list|length }}</span>
+{% endblock %}
