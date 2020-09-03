@@ -21,6 +21,7 @@ pip install -r requirements.txt
 6. Выполнить миграции для создания БД:
 
 python manage.py makemigrations
+
 python manage.py migrate
 
 7. Импортировать в БД данные:
